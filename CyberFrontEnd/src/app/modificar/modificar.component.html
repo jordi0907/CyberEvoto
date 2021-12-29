@@ -1,0 +1,59 @@
+<div class="login">
+  <h2 class="login-header">MODIFICAR PERSONA:</h2>
+  <form [formGroup]="modificadoPersonaForm" *ngIf ="resultado" class="login-container" (ngSubmit)="modificarPersona()">
+
+
+    Nombre: <input type="string" placeholder="Nombre" formControlName="nombre" class="form-control"/>*
+    <ng-container
+      *ngIf="!formControls.nombre.valid && formControls.nombre.touched ">
+      <p *ngIf="formControls.nombre.errors.required">
+        Este Campo es Obligatorio
+      </p>
+    </ng-container>
+
+
+  <p>
+    Apellidos: <input type="string" placeholder=" Apellidos" formControlName="apellidos" class="form-control" />*
+    <ng-container
+      *ngIf="!formControls.apellidos.valid && formControls.apellidos.touched">
+      <p *ngIf="formControls.apellidos.errors.required">
+        Este Campo es Obligatorio
+      </p>
+    </ng-container>
+  </p>
+
+  <p>
+  Fecha Nacimiento: <input type="string" placeholder="DD/MM/YYYY" formControlName="fechanacimiento" class="form-control" />
+    <ng-container
+    *ngIf="!formControls.fechanacimiento.valid && formControls.fechanacimiento.touched">
+      <p *ngIf="formControls.fechanacimiento.errors.pattern">
+        Este Campo no tiene formato correcto DD/MM/YYYY
+      </p>
+    </ng-container>
+  </p>
+
+  <p>
+    Fecha Vacunado: <input type="string" placeholder="DD/MM/YYYY" formControlName="fechavacunado" class="form-control" />
+    <ng-container
+    *ngIf="!formControls.fechavacunado.valid && formControls.fechavacunado.touched">
+      <p *ngIf="formControls.fechavacunado.errors.pattern">
+        Este Campo no tiene formato correcto DD/MM/YYYY
+      </p>
+    </ng-container>
+  </p>
+
+  <p>
+    Profesion: <input type="string" placeholder="Profesion" formControlName="profesion" class="form-control"/>
+  </p>
+
+  <p>
+    Vacuna Aplicada: <input type="string" placeholder="Vacuna Aplicada" formControlName="vacuna" class="form-control"/>
+  </p>
+
+    <p>
+      <input type="submit" value="Modificar" [disabled]="modificadoPersonaForm.invalid" />
+      <input type="submit" value="Atrás" (click) = "atras()" />
+    </p>
+  </form>
+</div>
+

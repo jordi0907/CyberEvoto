@@ -1,0 +1,33 @@
+{
+  "name": "cyber_server_rsa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node dist/index.js",
+    "dev": "tsc-watch --onSuccess \"node dist/index.js\"",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bigint-conversion": "^2.2.1",
+    "bigint-crypto-utils": "^3.0.9",
+    "cors": "^2.8.5",
+    "crypto-js": "^4.1.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.3",
+    "morgan": "^1.10.0",
+    "object-sha": "^2.0.6"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.10",
+    "@types/express": "^4.17.11",
+    "@types/mongoose": "^5.10.4",
+    "@types/morgan": "^1.9.2",
+    "tsc-watch": "^4.2.9",
+    "typescript": "^4.2.4"
+  }
+}
