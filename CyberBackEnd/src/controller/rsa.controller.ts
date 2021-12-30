@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import Persona, { IPersona } from "../models/persona";
 import Voto, {IVoto} from "../models/voto"
+import jwt from "jsonwebtoken";
+import config from "../config/config";
 
 import * as bigintConversion from "bigint-conversion";
 import * as rsa from "../models/rsa";
@@ -35,7 +37,11 @@ export const getPublica = async (req: Request, res: Response) => {
   }
 }; */
 
-
+function createToken(user: IPersona) {
+  return jwt.sign({ id: user.id, nombre: user.nombre, DNI: user.DNI }, config.jwtSecret, {
+      expiresIn: 86400
+  });
+}
 
 export async function rsaInit(){ 
   console.log("Generando claves RSA")
@@ -122,6 +128,53 @@ export async function votarRSA(req: Request, res: Response) {
       res.status(200).json({msg : "error en el voto añadido"});
     }
    
+  } catch (err) {
+    res.status(500).json({ message: "server error" });
+  }
+}
+
+
+
+export async function signIn(req: Request, res: Response) {
+  try {
+    if (!req.body.nombre || !req.body.password) {
+      return res
+          .status(400)
+          .json({ msg: "Please. Envia tu nombre y password" });
+  }
+
+  const user = await Persona.findOne({ nombre: req.body.nombre, password: req.body.password, DNI: req.body.DNI });
+  if (!user) {
+      return res.status(400).json({ msg: "El email o el password son incorrectos" });
+  }
+
+  return res.status(200).json({ token: createToken(user) });
+ //return res.status(200).json({ mensaje:"logoneado" });
+
+  } catch (err) {
+    res.status(500).json({ message: "server error" });
+  }
+}
+
+
+
+export async function registrar(req: Request, res: Response) {
+  try {
+    if (!req.body.nombre || !req.body.password) {
+      return res
+          .status(400)
+          .json({ msg: "Please. Envia tu nombre y password" });
+  }
+
+  const user = await Persona.findOne({ nombre: req.body.nombre, password: req.body.password, DNI: req.body.DNI });
+  if (user) {
+      return res.status(400).json({ msg: "Ya estas registrado" });
+  }
+
+ // return res.status(200).json({ token: createToken(user) });
+ const savedResultado = await Persona.create({"nombre": req.body.nombre, "DNI": req.body.DNI, "password": req.body.password });
+ return res.status(200).json({ mensaje:"logoneado" });
+
   } catch (err) {
     res.status(500).json({ message: "server error" });
   }

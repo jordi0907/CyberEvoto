@@ -10,7 +10,8 @@ import * as bigintConversion from 'bigint-conversion'
 import rsaRoutes from './routes/rsa.routes';
 import * as rsa from "./models/rsa";
 
-
+import passport from 'passport'
+import passportMiddleware from './middlewares/passport';
 
 //inicializations
 const app = express();
@@ -25,6 +26,8 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(bodyParser.json());
+app.use(passport.initialize());
+passport.use(passportMiddleware);
 
 
 
