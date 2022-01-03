@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { MensajeServidor, Mensaje, CifradoRSA } from '../model/modelo';
 import { generateKeys, rsaKeyPair, RsaPublicKey, RsaPrivateKey, Cegador } from '../model/rsa';
+import { AuthService } from '../services/auth.service';
 
 //import * as cryptojs from 'crypto';
 import * as sha from 'object-sha'
@@ -36,7 +37,8 @@ export class PrincipalComponent implements OnInit {
     private personaService: PersonaService,
     private router: Router,
     private cifrarClave: CifrarService,
-    private cifrarRSA: CifrarService
+    private cifrarRSA: CifrarService,
+    public authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -212,6 +214,12 @@ export class PrincipalComponent implements OnInit {
               Swal.fire('Error en la recogida de la clave publica', '', 'error');
             }
           );
+        }
+
+
+        logout(){
+          this.authService.logout();
+          this.router.navigateByUrl('/auth');
         }
 
 

@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PrincipalComponent } from './principal/principal.component';
 import { NuevoComponent } from './nuevo/nuevo.component';
 import { ModificarComponent } from './modificar/modificar.component';
+import { AuthComponent } from './auth/auth.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ModificarComponent } from './modificar/modificar.component';
     AppComponent,
     PrincipalComponent,
     NuevoComponent,
-    ModificarComponent
+    ModificarComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,33 @@
+<h1 style="text-align: center">Log in && discover our app</h1>
+<div class="login">
+  <h2 class="login-header">Log in</h2>
+  <form [formGroup]="authForm" class="login-container" (ngSubmit)="signIn()">
+    <input type="string" placeholder="Nombre" formControlName="nombre" />
+    <ng-container
+      *ngIf="!formControls.nombre.valid && formControls.nombre.touched"
+    >
+      <p *ngIf="formControls.nombre.errors.required">nombre is required</p>
+      <p *ngIf="formControls.nombre.errors.nombre">This field must be an nombre</p>
+    </ng-container>
+
+    <input type="string" placeholder="DNI" formControlName="DNI" />
+    <ng-container
+      *ngIf="!formControls.DNI.valid && formControls.DNI.touched"
+    >
+      <p *ngIf="formControls.DNI.errors.required">DNI is required</p>
+      <p *ngIf="formControls.DNI.errors.DNI">This field must be an DNI</p>
+    </ng-container>
+
+    <input type="password" placeholder="Password" formControlName="password" />
+    <ng-container
+      *ngIf="!formControls.password.valid && formControls.password.touched"
+    >
+      <p *ngIf="formControls.password.errors.required">
+        Password is required
+      </p>
+    </ng-container>
+    <p>
+      <input type="submit" value="Log in" [disabled]="authForm.invalid" />
+    </p>
+  </form>
+</div>
