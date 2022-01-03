@@ -13,6 +13,7 @@ let mensaje = "hola que tal, como estas";
 let keyPair: rsa.rsaKeyPair;
 const bc = require("bigint-conversion");
 
+
 /* // coger clave publica
 export const getPublica = async (req: Request, res: Response) => {
   try {
@@ -102,8 +103,10 @@ export async function cifrarRSA(req: Request, res: Response) {
 
 export async function signRSA(req: Request, res: Response) {
   let mensaje = req.body.msg;
+  console.log("req", req.body);
   try {
     const mensajecifrado: bigint = await keyPair.privateKey.sign(bigintConversion.hexToBigint(mensaje))
+    const censadoAct = await Persona.findByIdAndUpdate(req.body._id, {$set: {"censado": "true"}},{new:true});; 
     res.status(200).json({msg : bigintConversion.bigintToHex(mensajecifrado)});
   } catch (err) {
     res.status(500).json({ message: "server error" });
@@ -174,6 +177,38 @@ export async function registrar(req: Request, res: Response) {
  // return res.status(200).json({ token: createToken(user) });
  const savedResultado = await Persona.create({"nombre": req.body.nombre, "DNI": req.body.DNI, "password": req.body.password });
  return res.status(200).json({ mensaje:"logoneado" });
+
+  } catch (err) {
+    res.status(500).json({ message: "server error" });
+  }
+}
+
+
+export async function recuento(req: Request, res: Response) {
+  try {
+
+  const userJordi = await Voto.find({voto: "Jordi"});
+  if (!userJordi) {
+      return res.status(400).json({ msg: "No hay ningun voto" });
+  }
+  console.log("usuarios", userJordi);
+
+  const userMarc = await Voto.find({voto: "Marc"});
+  if (!userJordi) {
+      return res.status(400).json({ msg: "No hay ningun voto" });
+  }
+  console.log("usuarios", userJordi);
+
+  const userCarlos = await Voto.find({voto: "Carlos"});
+  if (!userJordi) {
+      return res.status(400).json({ msg: "No hay ningun voto" });
+  }
+  console.log("usuarios", userJordi);
+
+
+
+ 
+ return res.status(200).json({ numeroJordi: userJordi.length, numeroMarc: userMarc.length, numeroCarlos: userCarlos.length});
 
   } catch (err) {
     res.status(500).json({ message: "server error" });
