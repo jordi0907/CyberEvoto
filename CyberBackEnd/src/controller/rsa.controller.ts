@@ -14,6 +14,7 @@ let keyPair: rsa.rsaKeyPair;
 const bc = require("bigint-conversion");
 
 
+
 /* // coger clave publica
 export const getPublica = async (req: Request, res: Response) => {
   try {
@@ -104,10 +105,24 @@ export async function cifrarRSA(req: Request, res: Response) {
 export async function signRSA(req: Request, res: Response) {
   let mensaje = req.body.msg;
   console.log("req", req.body);
+  console.log("req user", req.user);
+  
   try {
-    const mensajecifrado: bigint = await keyPair.privateKey.sign(bigintConversion.hexToBigint(mensaje))
-    const censadoAct = await Persona.findByIdAndUpdate(req.body._id, {$set: {"censado": "true"}},{new:true});; 
-    res.status(200).json({msg : bigintConversion.bigintToHex(mensajecifrado)});
+    const mensajecifrado: bigint = await keyPair.privateKey.sign(bigintConversion.hexToBigint(mensaje));
+    const Usercensado = await Persona.findById(req.user);;
+   // const UsercensadoAct = await Persona.findByIdAndUpdate(req.user, {$set: {"censado": "true"}},{new:true});;
+    if (Usercensado){
+      if (Usercensado.censado == "false"){ 
+      const UsercensadoAct = await Persona.findByIdAndUpdate(req.user, {$set: {"censado": "true"}},{new:true});;  
+      res.status(200).json({msg : bigintConversion.bigintToHex(mensajecifrado)});
+      }
+      else{
+      res.status(404).json({msg : "El usuario ya tiene la firma, contacte con el administrador"});  
+      }
+      }
+    else{
+      res.status(404).json({msg : "El usuario no se encuentra censado, Usuario desconocido"});  
+    }
   } catch (err) {
     res.status(500).json({ message: "server error" });
   }
@@ -191,19 +206,19 @@ export async function recuento(req: Request, res: Response) {
   if (!userJordi) {
       return res.status(400).json({ msg: "No hay ningun voto" });
   }
-  console.log("usuarios", userJordi);
+  console.log("userJordi", userJordi.length);
 
   const userMarc = await Voto.find({voto: "Marc"});
   if (!userJordi) {
       return res.status(400).json({ msg: "No hay ningun voto" });
   }
-  console.log("usuarios", userJordi);
+  console.log("userMarc", userMarc.length);
 
   const userCarlos = await Voto.find({voto: "Carlos"});
   if (!userJordi) {
       return res.status(400).json({ msg: "No hay ningun voto" });
   }
-  console.log("usuarios", userJordi);
+  console.log("userCarlos", userCarlos.length);
 
 
 

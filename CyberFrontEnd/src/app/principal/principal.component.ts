@@ -275,18 +275,25 @@ export class PrincipalComponent implements OnInit {
                     }),
                       (err) => {
                         console.log('error');
-                        Swal.fire('Error en la envio del mensaje', '', 'error');
+                        Swal.fire('Error en el envio del mensaje', '', 'error');
                       };
 
 
                 }else{
                   console.log("no, no verificado")
+                  Swal.fire('La firma no esta verificada', '', 'error');
                 }
-              }),
+              },
                 (err) => {
+                  console.log(err.status)
+                  if (err.status == 404){
+                    console.log('Ya ha votado');
+                    Swal.fire('Ya has votado, no puedes volver a votar', '', 'error');}
+                  else{
                   console.log('error');
                   Swal.fire('Error en la envio del mensaje', '', 'error');
-                };
+                  }
+                });
             },
             (err) => {
               console.log('error');
