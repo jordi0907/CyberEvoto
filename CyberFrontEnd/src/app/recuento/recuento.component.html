@@ -1,0 +1,59 @@
+<header>
+
+</header>
+
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Candidatos</th>
+        <th>Votos</th>
+        <th>Elecciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>{{recuentoSorted[0][0]}}</td>
+        <td>{{ recuentoSorted[0][1] }}</td>
+
+
+        <td>
+
+          <button
+            class="btn btn-secondary btn-sm"
+
+          >
+            <i class="material-icons-two-tone">
+              sentiment_satisfied </i>
+          </button>
+
+        </td>
+      </tr>
+      <tr>
+        <td>{{recuentoSorted[1][0]}}</td>
+        <td>{{recuentoSorted[1][1]}}</td>
+        <td>
+          <button
+            class="btn btn-secondary btn-sm"
+
+          >
+          <i class="material-icons-two-tone">
+            sentiment_neutral </i>
+          </button>
+      </tr>
+      <tr>
+        <td>{{recuentoSorted[2][0]}}</td>
+        <td>{{recuentoSorted[2][1]}}</td>
+        <td>
+          <button
+            class="btn btn-secondary btn-sm"
+
+          >
+          <i class="material-icons-two-tone">
+            sentiment_dissatisfied </i>
+          </button>
+      </tr>
+
+    </tbody>
+  </table>

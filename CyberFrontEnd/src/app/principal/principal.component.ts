@@ -271,13 +271,14 @@ export class PrincipalComponent implements OnInit {
 
                     this.cifrarRSA.votarRSA(dataEnviarVoto).subscribe(async (res) => {
                         console.log(res)
+                        Swal.fire('Voto Correctamente Enviado', '', 'success');
 
-                    }),
+                    },
                       (err) => {
                         console.log('error');
                         Swal.fire('Error en el envio del mensaje', '', 'error');
-                      };
-
+                      }
+                    )
 
                 }else{
                   console.log("no, no verificado")

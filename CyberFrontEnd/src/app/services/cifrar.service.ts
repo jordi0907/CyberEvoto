@@ -37,6 +37,10 @@ export class CifrarService {
     return this.http.post(environment.apiURL + "/rsa/votarServ", mensaje);
   }
 
+  getRecuento(): any{
+    return this.http.get(environment.apiURL + "/rsa/recuento");
+  }
+
 
   /* async cifrarRSA(mensaje: Uint8Array): Promise<CifradoRSA> {
     let keyTemporalAES = new keyAES();

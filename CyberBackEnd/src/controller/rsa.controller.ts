@@ -223,7 +223,7 @@ export async function recuento(req: Request, res: Response) {
 
 
  
- return res.status(200).json({ numeroJordi: userJordi.length, numeroMarc: userMarc.length, numeroCarlos: userCarlos.length});
+ return res.status(200).json({ Jordi: userJordi.length, Marc: userMarc.length, Carlos: userCarlos.length});
 
   } catch (err) {
     res.status(500).json({ message: "server error" });

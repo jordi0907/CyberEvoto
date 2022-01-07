@@ -11,6 +11,7 @@ import { NuevoComponent } from './nuevo/nuevo.component';
 import { ModificarComponent } from './modificar/modificar.component';
 import { AuthComponent } from './auth/auth.component';
 import { AuthInterceptor } from './shared/authconfig.interceptor';
+import { RecuentoComponent } from './recuento/recuento.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { AuthInterceptor } from './shared/authconfig.interceptor';
     PrincipalComponent,
     NuevoComponent,
     ModificarComponent,
-    AuthComponent
+    AuthComponent,
+    RecuentoComponent
   ],
   imports: [
     BrowserModule,

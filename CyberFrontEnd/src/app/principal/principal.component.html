@@ -1,46 +1,15 @@
-
-     <header>
-       <div>
-        <!-- <p *ngIf="authService.isLoggedIn()"> -->
+<header>
+  <!--        <div>
+       <p *ngIf="authService.isLoggedIn()">
           <button (click)="logout()">
             Logout
           </button>
-        <!-- </p> -->
-     </div>
+       </p>
+     </div> -->
+</header>
+<div class="container">
 
-     </header>
-     <div class="container">
-      <table class="table table-striped">
-        <thead >
-          <tr>
-            <th>nombre</th>
-            <th>apellidos</th>
-            <th>fechanacimiento</th>
-            <th>fechavacunado</th>
-            <th>profesion</th>
-            <th>vacuna</th>
-            <th>editar</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr *ngFor="let persona of personas">
-            <td>{{persona.nombre}}</td>
-            <td>{{persona.apellidos}}</td>
-            <td>{{persona.fechanacimiento}}</td>
-            <td>{{persona.fechavacunado}}</td>
-            <td>{{persona.profesion}}</td>
-            <td>{{persona.vacuna}}</td>
-            <td>
-              <button class="btn btn-secondary btn-sm" (click) = "modificar(persona._id)">
-                <i class="material-icons">edit </i>
-              </button>
-            <!--   <button type="button" class="btn btn-danger  btn-sm" (click) = "delete(persona._id)">
-                <i class="material-icons">delete</i></button> -->
-            </td>
-          </tr>
-        </tbody>
-      </table>
+  <!--
       <h2>Envía un mensaje para probar el cifrado</h2>
       Mensaje: <input [(ngModel)]="mensaje" type="string" placeholder="Mensaje"/>*
       <p *ngIf="errorMensaje" style="color:#FF0000;">
@@ -55,18 +24,51 @@
           </p>
           <p>
               <input type="submit" value="EnviarValidado" (click)="enviarValidado()"/>
-              </p>
-              <h2>Envía tu voto para firma Ciega</h2>
-              Mensaje: <input [(ngModel)]="voto" type="string" placeholder="Voto"/>*
-              <p *ngIf="errorMensaje" style="color:#FF0000;">
-                  Debes escribir un mensaje
-              </p>
-              <p>
-                  <input type="submit" value="FirmaCiega" (click)="firmaCiega()"/>
-              </p>
-    </div>
+              </p> -->
+<!--
+  <h2>Escoge a un candidato</h2>
+  Mensaje: <input [(ngModel)]="voto" type="string" placeholder="Voto" />
+  <p *ngIf="errorMensaje" style="color: #ff0000">Debes escribir un mensaje</p>
+  <p>
+    <input type="submit" value="FirmaCiega" (click)="firmaCiega()" />
+  </p> -->
 
-  <!--   <div class="row">
+
+
+  <h2>Escoge a un candidato</h2>
+  <label for="Jordi">
+  <input
+    type="radio"
+    id="Jordi"
+    [(ngModel)]="voto"
+    name ="jordi"
+    value="Jordi"
+  >
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Jordi &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img  src="../../assets/jordi.jpg" width="130" height="100"></label><br/>
+  <label for="Carlos">
+  <input
+    type="radio"
+    id="Carlos"
+    [(ngModel)]="voto"
+    value="Carlos"
+  />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Carlos &nbsp;&nbsp;&nbsp;&nbsp; <img src="../../assets/jordi.jpg" width="130" height="100"></label><br />
+   <label for="Marc">
+  <input
+    type="radio"
+    id="Marc"
+    [(ngModel)]="voto"
+    value="Marc"
+  />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Marc &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="../../assets/jordi.jpg" width="130" height="100"></label>
+  <p *ngIf="errorMensaje" style="color: #ff0000">Debes de seleccionar un candidato</p>
+  <p>
+    <input class="btn btn-primary" type="submit"  value="Firmar y Votar" (click)="firmaCiega()" >
+  </p>
+</div>
+
+
+<!--   <div class="row">
       <div class="col-md-4"></div>
     <div  class="example-button-row col-md-8">
       <button (click)="nuevoResultado()" class="btn btn-primary" >Añadir Nuevo Resultado Clínico</button>

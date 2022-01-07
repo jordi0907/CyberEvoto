@@ -1,7 +1,7 @@
-# Minimo1 Jordi Rodriguez
+# CyberEVoto 
 
 # Install Project
-1. git clone https://github.com/jordi0907/Minimo1EA
+1. git clone https://github.com/jordi0907/CyberEvoto
 2. Install nodejs, mongodb 
 
 # Execute Backend
