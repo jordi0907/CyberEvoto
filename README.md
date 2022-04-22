@@ -14,4 +14,4 @@
 
 1. cd frontend 
 2. Execute "npm install". 
-3. Execute "ng serve"
+3. Execute "npm run start"

@@ -46,6 +46,7 @@ function createToken(user: IPersona) {
 }
 
 export async function rsaInit(){ 
+  console.log("**********APLICACION EVOTO***********")
   console.log("Generando claves RSA")
  
   keyPair = await rsa.generateKeys(2048);
@@ -58,7 +59,7 @@ export async function rsaInit(){
 // coger clave publica
 export async function getPublicKeyRSA(req: Request, res: Response) {
   //keyPair = await rsa.generateKeys(2048);
-  console.log("keyRSA", keyPair.publicKey)
+  console.log("Clave Publica RSA", keyPair.publicKey)
   try {
      let data = {
       e: await bc.bigintToHex(keyPair.publicKey.e),
@@ -76,11 +77,11 @@ export async function getPublicKeyRSA(req: Request, res: Response) {
 
 export async function descifrarRSA(req: Request, res: Response) {
   let mensaje = req.body.msg;
-  console.log("mensaje para descifrar", mensaje)
+  console.log("1 mensaje para descifrar", mensaje)
   try {
     const mensajeDescifrado: bigint = await keyPair.privateKey.decrypt(bigintConversion.hexToBigint(mensaje));
     const mensajeFinal: string = bigintConversion.bigintToText(mensajeDescifrado)
-    console.log("mensaje descifrado", mensajeFinal)
+    console.log("2 mensaje descifrado", mensajeFinal)
     let data = {msg: mensajeFinal }
     res.status(200).send(data);
   } catch (err) {
@@ -90,7 +91,7 @@ export async function descifrarRSA(req: Request, res: Response) {
 
 export async function cifrarRSA(req: Request, res: Response) {
   let mensaje = req.body.msg;
-  console.log("keyRSA", keyPair.publicKey)
+  //console.log("keyRSA", keyPair.publicKey)
   try {
     const mensajecifrado: bigint = await keyPair.publicKey.encrypt(bigintConversion.textToBigint(mensaje))
     res.status(200).send(bigintConversion.bigintToHex(mensajecifrado));
@@ -136,7 +137,7 @@ export async function votarRSA(req: Request, res: Response) {
     const firmaVerif: bigint = await keyPair.publicKey.verify(bigintConversion.hexToBigint(firma))
     const votoCifradoBigInt: bigint = await (bigintConversion.hexToBigint(votoCifrado))
     if(firmaVerif===votoCifradoBigInt){
-      console.log("Verificado el voto")
+      console.log("El voto esta Verificado")
       let votoDescifrado: bigint = await keyPair.privateKey.decrypt((votoCifradoBigInt))
       let votoDescifradoText = await (bigintConversion.bigintToText(votoDescifrado))
       console.log("el voto ha sido," , votoDescifradoText)
